@@ -123,6 +123,11 @@ void* do_swaps(void* args)
 				pthread_mutex_lock(&rowLockArray[row1]);
 				pthread_mutex_lock(&rowLockArray[row2]);
 			#endif
+
+			#ifdef WINDOWS
+				while( WaitForSingleObject(grid_locks[row1],0) == WAIT_TIMEOUT );
+				while( WaitForSingleObject(grid_locks[row2][0],0) == WAIT_TIMEOUT );
+			#endif
   		  }
 		  else if(row1>row2)
 		  {
@@ -192,7 +197,9 @@ void* do_swaps(void* args)
 
 		/* Critical Section */
 		temp = grid[row1][column1];
-		sleep(1);
+		#ifdef UNIX
+			sleep(1);
+		#endif
 		grid[row1][column1]=grid[row2][column2];
 		grid[row2][column2]=temp;
 

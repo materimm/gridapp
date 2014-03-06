@@ -229,6 +229,7 @@ void* do_swaps(void* args)
 			#ifdef UNIX
 				  pthread_mutex_unlock(&cellLockMatrix[row2][column2]);
 			#endif
+		  }
 		}
 		else if (*gran_type == GRID)
 		{

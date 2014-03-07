@@ -13,8 +13,8 @@ PROG = gridapp
 #############################################
 all: $(PROG)
 
-gridapp: gridapp.c
-	$(CC) -o gridapp gridapp.c $(CFLAGS)
+gridapp: gridapp_no_flags.c
+	$(CC) -o gridapp gridapp_no_flags.c $(CFLAGS)
 
 clean:
 	$(RM) $(PROG) *.o core *~
